@@ -8,6 +8,7 @@ import html
 from dotenv import load_dotenv
 from html.parser import HTMLParser
 
+
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
@@ -32,7 +33,7 @@ def strip_tags(html_text):
     return s.get_data()
 
 KEYWORDS = [
-    "it", "technology", "tech", "digital", "information technology", "ict",
+    "technology", "tech", "digital", "information technology", "ict",
     "software", "developer", "development", "programming", "coding",
     "engineering", "engineer", "dev", "devops", "debugging",
     "software engineer", "fullstack", "frontend", "backend",
@@ -54,15 +55,29 @@ KEYWORDS = [
 ]
 
 RSS_FEEDS = [
-    "https://techcrunch.com/feed/",
-    "https://www.theverge.com/rss/index.xml",
-    "https://www.wired.com/feed/rss",
-    "https://www.technologyreview.com/feed/",
-    "https://www.engadget.com/rss.xml",
-    "https://feeds.arstechnica.com/arstechnica/index",
-    "https://www.zdnet.com/news/rss.xml",
-    "https://www.cnet.com/rss/news/",
+    # Reddit texnoloji subreddits
+    'https://www.reddit.com/r/technology/.rss',
+    'https://www.reddit.com/r/programming/.rss',
+    'https://www.reddit.com/r/artificial/.rss',
+
+    # Hacker News (ən çox oxunan texnoloji postlar)
+    'https://hnrss.org/frontpage',
+
+    # Dev.to – texnoloji məqalələr (RSS ilə)
+    'https://dev.to/feed',  # bütün məqalələr
+    # 'https://dev.to/feed/tag/python',  # Python üzrə
+    # 'https://dev.to/feed/tag/ai',       # Süni intellekt üzrə
+
+    # Medium – texnologiya tag-lı yazılar
+    'https://medium.com/feed/tag/technology',
+    'https://medium.com/feed/tag/artificial-intelligence',
+    'https://medium.com/feed/tag/programming',
+
+    # Lobsters – texniki xəbərlər (Reddit və Hacker News tərzindədir)
+    'https://lobste.rs/rss'
 ]
+
+
 
 def matched_keywords(text):
     if not text:
@@ -149,6 +164,6 @@ if __name__ == "__main__":
             print("🕒 Checking...")
             check_feeds()
             print("⏳ Waiting 1 hour...")
-            time.sleep(3600)
+            time.sleep(100)
     except KeyboardInterrupt:
         print("🛑 BOT was stopped.")
